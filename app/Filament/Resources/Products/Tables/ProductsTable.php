@@ -2,7 +2,9 @@
 
 namespace App\Filament\Resources\Products\Tables;
 
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Tables\Columns\IconColumn;
@@ -22,18 +24,21 @@ class ProductsTable
                     ->searchable(),
                 TextColumn::make('description')
                     ->searchable(),
-                IconColumn::make('visibility')
-                    ->boolean(),
-                ImageColumn::make('image'),
+                ImageColumn::make('images')
+                    ->imageHeight(40)
+                    ->circular()
+                    ->stacked(),
                 TextColumn::make('price')
                     ->money()
                     ->sortable(),
-                TextColumn::make('quantity')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('sku')
-                    ->label('SKU')
-                    ->searchable(),
+                IconColumn::make('in_stock')
+                    ->boolean(),
+                IconColumn::make('is_active')
+                    ->boolean(),
+                IconColumn::make('is_feature')
+                    ->boolean(),
+                IconColumn::make('on_sale')
+                    ->boolean(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -47,7 +52,10 @@ class ProductsTable
                 //
             ])
             ->recordActions([
-                EditAction::make(),
+                ActionGroup::make([
+                    EditAction::make('edit'),
+                    DeleteAction::make('delete'),
+                ]),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

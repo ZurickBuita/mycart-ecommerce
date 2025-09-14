@@ -3,8 +3,13 @@
 namespace App\Filament\Resources\Products\Schemas;
 
 use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\MarkdownEditor;
+use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Schemas\Components\Group;
+use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
 class ProductForm
@@ -13,27 +18,60 @@ class ProductForm
     {
         return $schema
             ->components([
-                TextInput::make('name')
-                    ->required(),
-                TextInput::make('slug')
-                    ->required(),
-                TextInput::make('description')
-                    ->required(),
-                Toggle::make('visibility')
-                    ->required(),
-                FileUpload::make('image')
-                    ->image()
-                    ->required(),
-                TextInput::make('price')
-                    ->required()
-                    ->numeric()
-                    ->prefix('$'),
-                TextInput::make('quantity')
-                    ->required()
-                    ->numeric(),
-                TextInput::make('sku')
-                    ->label('SKU')
-                    ->required(),
-            ]);
+                Group::make()->schema([
+                    Section::make('Product Information')
+                        ->schema([
+                            Group::make()->schema([
+                                TextInput::make('name')
+                                    ->required(),
+                                TextInput::make('slug')
+                                    ->required(),
+
+                                MarkdownEditor::make('description')
+                                    ->fileAttachmentsDirectory('products')
+                                    ->columnSpanFull(),
+                            ])->columns(2),
+                        ]),
+                    Section::make('Images')
+                        ->schema([
+                            FileUpload::make('images')
+                                ->image()
+                                ->multiple()
+                                ->required(),
+                        ]),
+                ])->columnSpan(2),
+                Group::make()->schema([
+                    Section::make('Price')
+                        ->schema([
+                            TextInput::make('price')
+                                ->required()
+                                ->numeric()
+                                ->default(0.0)
+                                ->prefix('$'),
+                        ]),
+                    Section::make('Association')
+                        ->schema([
+                            Select::make('category_id')
+                                ->relationship('category', 'name')
+                                ->searchable()
+                                ->preload(),
+                            Select::make('brand_id')
+                                ->relationship('brand', 'name')
+                                ->searchable()
+                                ->preload(),
+                        ]),
+                    Section::make('Status')
+                        ->schema([
+                            Toggle::make('in_stock')
+                                ->required(),
+                            Toggle::make('is_active')
+                                ->required(),
+                            Toggle::make('is_feature')
+                                ->required(),
+                            Toggle::make('on_sale')
+                                ->required(),
+                        ]),
+                ])->columnSpan(1),
+            ])->columns(3);
     }
 }

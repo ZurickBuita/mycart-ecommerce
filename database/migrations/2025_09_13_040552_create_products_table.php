@@ -13,16 +13,16 @@ return new class extends Migration {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('slug');
-            $table->string('summary');
-            $table->string('description');
-            $table->boolean('visibility')->default(true);
-            $table->string('image');
-            $table->double('price');
-            $table->integer('quantity');
-            $table->string('sku');
-            $table->integer('discount');
-            $table->enum('size', ['S', 'M', 'L', 'XL', '2XL'])->default('S');
+            $table->string('slug')->unique();
+            $table->string('description')->nullable();
+            $table->string('images');
+            $table->decimal('price', 10, 2)->default(0);
+            $table->boolean('in_stock')->default(0);
+            $table->boolean('is_active')->default(true);
+            $table->boolean('is_feature')->default(true);
+            $table->boolean('on_sale')->default(false);
+            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
+           
             $table->timestamps();
         });
     }
