@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Products\Schemas;
 
+use App\Models\Product;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\RichEditor;
@@ -10,7 +11,9 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Schemas\Components\Group;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
+use Str;
 
 class ProductForm
 {
@@ -23,9 +26,18 @@ class ProductForm
                         ->schema([
                             Group::make()->schema([
                                 TextInput::make('name')
-                                    ->required(),
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->live()
+                                    ->afterStateUpdated(
+                                        fn(string $operation, $state, Set $set) =>
+                                        $operation === 'create' ? $set('slug', Str::slug($state)) : null
+                                    ),
                                 TextInput::make('slug')
-                                    ->required(),
+                                    ->required()
+                                    ->disabled()
+                                    ->dehydrated()
+                                    ->unique(Product::class, 'slug', ignoreRecord: true),
 
                                 MarkdownEditor::make('description')
                                     ->fileAttachmentsDirectory('products')
