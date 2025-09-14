@@ -9,12 +9,18 @@ use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
+use Filament\Actions\ViewAction;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
+use Filament\Infolists\Components\IconEntry;
+use Filament\Infolists\Components\ImageEntry;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -34,10 +40,29 @@ class CategoryResource extends Resource
                     ->required(),
                 TextInput::make('slug')
                     ->required(),
-                TextInput::make('description')
+                FileUpload::make('image')
+                    ->image()
                     ->required(),
                 Toggle::make('visibility')
                     ->required(),
+            ]);
+    }
+
+    public static function infolist(Schema $schema): Schema
+    {
+        return $schema
+            ->components([
+                TextEntry::make('name'),
+                TextEntry::make('slug'),
+                ImageEntry::make('image'),
+                IconEntry::make('visibility')
+                    ->boolean(),
+                TextEntry::make('created_at')
+                    ->dateTime()
+                    ->placeholder('-'),
+                TextEntry::make('updated_at')
+                    ->dateTime()
+                    ->placeholder('-'),
             ]);
     }
 
@@ -50,8 +75,7 @@ class CategoryResource extends Resource
                     ->searchable(),
                 TextColumn::make('slug')
                     ->searchable(),
-                TextColumn::make('description')
-                    ->searchable(),
+                ImageColumn::make('image'),
                 IconColumn::make('visibility')
                     ->boolean(),
                 TextColumn::make('created_at')
@@ -67,6 +91,7 @@ class CategoryResource extends Resource
                 //
             ])
             ->recordActions([
+                ViewAction::make(),
                 EditAction::make(),
                 DeleteAction::make(),
             ])

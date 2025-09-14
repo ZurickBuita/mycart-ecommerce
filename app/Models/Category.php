@@ -10,6 +10,6 @@ class Category extends Model
         "name", 
         "slug",
         "visibility",
-        "description"
+        "image"
     ];
 }
