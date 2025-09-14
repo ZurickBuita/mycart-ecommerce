@@ -10,14 +10,17 @@ use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Infolists\Components\IconEntry;
+use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -27,17 +30,20 @@ class BrandResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
-    protected static ?string $recordTitleAttribute = 'title';
+    protected static ?string $recordTitleAttribute = 'name';
 
     public static function form(Schema $schema): Schema
     {
         return $schema
             ->components([
-                TextInput::make('title')
+                TextInput::make('name')
                     ->required(),
                 TextInput::make('slug')
                     ->required(),
-                Toggle::make('status')
+                FileUpload::make('image')
+                    ->image()
+                    ->required(),
+                Toggle::make('is_active')
                     ->required(),
             ]);
     }
@@ -46,9 +52,10 @@ class BrandResource extends Resource
     {
         return $schema
             ->components([
-                TextEntry::make('title'),
+                TextEntry::make('name'),
                 TextEntry::make('slug'),
-                IconEntry::make('status')
+                ImageEntry::make('image'),
+                IconEntry::make('is_active')
                     ->boolean(),
                 TextEntry::make('created_at')
                     ->dateTime()
@@ -62,13 +69,14 @@ class BrandResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
-            ->recordTitleAttribute('title')
+            ->recordTitleAttribute('name')
             ->columns([
-                TextColumn::make('title')
+                TextColumn::make('name')
                     ->searchable(),
                 TextColumn::make('slug')
                     ->searchable(),
-                IconColumn::make('status')
+                ImageColumn::make('image'),
+                IconColumn::make('is_active')
                     ->boolean(),
                 TextColumn::make('created_at')
                     ->dateTime()

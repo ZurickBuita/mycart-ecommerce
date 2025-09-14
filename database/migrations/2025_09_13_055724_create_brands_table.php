@@ -12,9 +12,10 @@ return new class extends Migration {
     {
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
-            $table->string('title');
+            $table->string('name');
             $table->string('slug');
-            $table->boolean('status')->default(true);
+            $table->string('image');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }
