@@ -42,9 +42,6 @@ class CategoryResource extends Resource
                     ->required(),
                 FileUpload::make('image')
                     ->image()
-                    ->directory('category-image')
-                    ->disk('public')
-                    ->openable()
                     ->required(),
                 Toggle::make('visibility')
                     ->required(),
@@ -57,8 +54,7 @@ class CategoryResource extends Resource
             ->components([
                 TextEntry::make('name'),
                 TextEntry::make('slug'),
-                ImageEntry::make('image')
-                    ->disk('public'),
+                ImageEntry::make('image'),
                 IconEntry::make('visibility')
                     ->boolean(),
                 TextEntry::make('created_at')
@@ -79,8 +75,7 @@ class CategoryResource extends Resource
                     ->searchable(),
                 TextColumn::make('slug')
                     ->searchable(),
-                ImageColumn::make('image')
-                    ->disk('public'),
+                ImageColumn::make('image'),
                 IconColumn::make('visibility')
                     ->boolean(),
                 TextColumn::make('created_at')
