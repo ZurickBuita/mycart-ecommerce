@@ -20,6 +20,13 @@ class Product extends Model
         'brand_id',
     ];
 
+    protected function casts(): array
+    {
+        return [
+            'images' => 'array',
+        ];
+    }
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -30,13 +37,8 @@ class Product extends Model
         return $this->belongsTo(Brand::class);
     }
 
-     /**
-     * @return array<string, string>
-     */
-    protected function casts(): array
-    { 
-        return [
-            'images' => 'array',
-        ];
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
     }
 }

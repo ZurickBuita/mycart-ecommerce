@@ -7,15 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $fillable = [
-        'number',
+        'payment_method',
+        'payment_status',
         'status',
         'currency',
-        'country',
-        'total_price',
-        'street_address',
-        'city',
-        'state_province',
-        'zip_postalcode',
-        'notes'
+        'shipping_method',
+        'notes',
+        'user_id'
     ];
+
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
 }
