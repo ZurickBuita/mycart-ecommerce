@@ -2,10 +2,12 @@
 
 namespace App\Filament\Resources\Orders\Schemas;
 
+use App\Enums\OrderStatus;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\ToggleButtons;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 
@@ -36,15 +38,9 @@ class OrderForm
                             ->options(['pending' => 'Pending', 'paid' => 'Paid', 'failed' => 'Failed'])
                             ->default('pending')
                             ->required(),
-                        Select::make('status')
-                            ->options([
-                                'new' => 'New',
-                                'processing' => 'Processing',
-                                'shipped' => 'Shipped',
-                                'delivered' => 'Delivered',
-                                'cancelled' => 'Cancelled',
-                            ])
-                            ->default('new')
+                        ToggleButtons::make('status')
+                            ->inline()
+                            ->options(OrderStatus::class)
                             ->required(),
                         Select::make('currency')
                             ->options(['php' => 'PHP', 'usd' => 'USD', 'eur' => 'EUR', 'cad' => 'CAD'])
