@@ -17,12 +17,14 @@ use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Columns\IconColumn;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Str;
 
 class BrandResource extends Resource
 {
@@ -37,9 +39,17 @@ class BrandResource extends Resource
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->required(),
+                    ->required()
+                    ->live()
+                    ->afterStateUpdated(
+                        fn($operation, $state, Set $set) =>
+                        $operation === 'create' ? $set('slug', Str::slug($state)) : null
+                    ),
                 TextInput::make('slug')
-                    ->required(),
+                    ->required()
+                    ->disabled()
+                    ->dehydrated()
+                    ->unique(Brand::class, 'slug', ignoreRecord: true),
                 FileUpload::make('image')
                     ->image()
                     ->directory('brand-image')
