@@ -12,16 +12,14 @@ return new class extends Migration {
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
-            $table->string('number');
+            $table->enum('payment_method', ['cash on delivery', 'credit card', 'bank transfer', 'paypal'])->default('cash on delivery');
+            $table->enum('payment_status', ['pending', 'paid', 'failed'])->default('pending');
             $table->enum('status', ['new', 'processing', 'shipped', 'delivered', 'cancelled'])->default('new');
-            $table->string('currency');
-            $table->string('country');
-            $table->integer('total_price');
-            $table->string('street_address');
-            $table->string('city');
-            $table->string('state_province');
-            $table->string('zip_postalcode');
-            $table->string('notes');
+            $table->enum('currency', ['php', 'usd', 'eur', 'cad'])->default('php');
+            $table->enum('shipping_method', ['standard', 'express', 'pick-up'])->default('standard');
+            $table->string('notes')->nullable();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
+
             $table->timestamps();
         });
     }

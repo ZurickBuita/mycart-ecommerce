@@ -15,27 +15,21 @@ class OrdersTable
     {
         return $table
             ->columns([
-                TextColumn::make('number')
-                    ->searchable(),
+                TextColumn::make('payment_method')
+                    ->badge(),
+                TextColumn::make('payment_status')
+                    ->badge(),
                 TextColumn::make('status')
                     ->badge(),
                 TextColumn::make('currency')
-                    ->searchable(),
-                TextColumn::make('country')
-                    ->searchable(),
-                TextColumn::make('total_price')
-                    ->numeric()
-                    ->sortable(),
-                TextColumn::make('street_address')
-                    ->searchable(),
-                TextColumn::make('city')
-                    ->searchable(),
-                TextColumn::make('state_province')
-                    ->searchable(),
-                TextColumn::make('zip_postalcode')
-                    ->searchable(),
+                    ->badge(),
+                TextColumn::make('shipping_method')
+                    ->badge(),
                 TextColumn::make('notes')
                     ->searchable(),
+                TextColumn::make('user_id')
+                    ->numeric()
+                    ->sortable(),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()

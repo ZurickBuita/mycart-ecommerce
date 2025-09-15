@@ -11,18 +11,20 @@ class OrderInfolist
     {
         return $schema
             ->components([
-                TextEntry::make('number'),
+                TextEntry::make('payment_method')
+                    ->badge(),
+                TextEntry::make('payment_status')
+                    ->badge(),
                 TextEntry::make('status')
                     ->badge(),
-                TextEntry::make('currency'),
-                TextEntry::make('country'),
-                TextEntry::make('total_price')
+                TextEntry::make('currency')
+                    ->badge(),
+                TextEntry::make('shipping_method')
+                    ->badge(),
+                TextEntry::make('notes')
+                    ->placeholder('-'),
+                TextEntry::make('user_id')
                     ->numeric(),
-                TextEntry::make('street_address'),
-                TextEntry::make('city'),
-                TextEntry::make('state_province'),
-                TextEntry::make('zip_postalcode'),
-                TextEntry::make('notes'),
                 TextEntry::make('created_at')
                     ->dateTime()
                     ->placeholder('-'),
