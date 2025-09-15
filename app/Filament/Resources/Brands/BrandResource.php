@@ -43,7 +43,8 @@ class BrandResource extends Resource
                 FileUpload::make('image')
                     ->image()
                     ->directory('brand-image')
-                    ->required(),
+                    ->required()
+                    ->columnSpanFull(),
                 Toggle::make('is_active')
                     ->required(),
             ]);
