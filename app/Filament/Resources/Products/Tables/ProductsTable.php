@@ -24,10 +24,6 @@ class ProductsTable
                     ->searchable(),
                 TextColumn::make('description')
                     ->searchable(),
-                ImageColumn::make('images')
-                    ->imageHeight(40)
-                    ->circular()
-                    ->stacked(),
                 TextColumn::make('price')
                     ->money()
                     ->sortable(),
