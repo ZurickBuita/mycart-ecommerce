@@ -25,19 +25,9 @@ class ProductForm
                         ->schema([
                             Group::make()->schema([
                                 TextInput::make('name')
-                                    ->required()
-                                    ->maxLength(255)
-                                    ->live()
-                                    ->afterStateUpdated(
-                                        fn(string $operation, $state, Set $set) =>
-                                        $operation === 'create' ? $set('slug', Str::slug($state)) : null
-                                    ),
+                                    ->required(),
                                 TextInput::make('slug')
-                                    ->required()
-                                    ->disabled()
-                                    ->dehydrated()
-                                    ->unique(Product::class, 'slug', ignoreRecord: true),
-
+                                    ->required(),
                                 MarkdownEditor::make('description')
                                     ->fileAttachmentsDirectory('products')
                                     ->columnSpanFull(),
