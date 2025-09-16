@@ -3,12 +3,15 @@
 namespace App\Filament\Resources\Orders\Schemas;
 
 use App\Enums\OrderStatus;
+use App\Models\Product;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ToggleButtons;
 use Filament\Schemas\Components\Section;
+use Filament\Schemas\Components\Utilities\Get;
+use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 
 class OrderForm
@@ -20,7 +23,7 @@ class OrderForm
                 Section::make('Order Information')
                     ->schema([
                         Select::make('user_id')
-                            ->label('User')
+                            ->label('Customer')
                             ->required()
                             ->relationship('user', 'name')
                             ->searchable()
@@ -57,16 +60,34 @@ class OrderForm
 
                 Section::make('Order Items')->schema([
                     Repeater::make('orderItems')
+                        ->relationship()
                         ->schema([
+                            Select::make('product_id')
+                                ->relationship('product', 'name')
+                                ->searchable()
+                                ->preload()
+                                ->distinct()
+                                ->disableOptionsWhenSelectedInSiblingRepeaterItems()
+                                ->reactive()
+                                ->afterStateUpdated(fn($state, Set $set) => $set('unit_amount', Product::find($state)?->price ?? 0))
+                                ->afterStateUpdated(fn($state, Set $set) => $set('total_amount', Product::find($state)?->price ?? 0)),
                             TextInput::make('quantity')
                                 ->required()
-                                ->numeric(),
+                                ->numeric()
+                                ->default(1)
+                                ->minValue(1)
+                                ->reactive()
+                                ->afterStateUpdated(fn($state, Set $set, Get $get) => $set('total_amount', $state * $get('unit_amount'))),
                             TextInput::make('unit_amount')
                                 ->required()
-                                ->numeric(),
+                                ->numeric()
+                                ->disabled()
+                                ->dehydrated(),
                             TextInput::make('total_amount')
                                 ->required()
-                                ->numeric(),
+                                ->numeric()
+                                ->disabled()
+                                ->dehydrated(),
                         ])
                         ->columns(4),
                 ])
