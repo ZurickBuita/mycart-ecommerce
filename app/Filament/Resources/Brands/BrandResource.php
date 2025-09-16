@@ -39,17 +39,9 @@ class BrandResource extends Resource
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->required()
-                    ->live()
-                    ->afterStateUpdated(
-                        fn($operation, $state, Set $set) =>
-                        $operation === 'create' ? $set('slug', Str::slug($state)) : null
-                    ),
+                    ->required(),
                 TextInput::make('slug')
-                    ->required()
-                    ->disabled()
-                    ->dehydrated()
-                    ->unique(Brand::class, 'slug', ignoreRecord: true),
+                    ->required(),
                 FileUpload::make('image')
                     ->image()
                     ->directory('brand-image')
