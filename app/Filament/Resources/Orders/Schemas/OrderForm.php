@@ -4,6 +4,8 @@ namespace App\Filament\Resources\Orders\Schemas;
 
 use App\Enums\OrderStatus;
 use App\Models\Product;
+use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Placeholder;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -13,6 +15,7 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
+use Number;
 
 class OrderForm
 {
@@ -48,7 +51,8 @@ class OrderForm
                         Select::make('currency')
                             ->options(['php' => 'PHP', 'usd' => 'USD', 'eur' => 'EUR', 'cad' => 'CAD'])
                             ->default('php')
-                            ->required(),
+                            ->required()
+                            ->reactive(),
                         Select::make('shipping_method')
                             ->options(['standard' => 'Standard', 'express' => 'Express', 'pick-up' => 'Pick up'])
                             ->default('standard')
@@ -90,6 +94,23 @@ class OrderForm
                                 ->dehydrated(),
                         ])
                         ->columns(4),
+                    Placeholder::make('grand_total_placeholder')
+                        ->label('Grand Total')
+                        ->content(function (Get $get, Set $set) {
+                            $total = 0;
+                            if (!$repeaters = $get('orderItems'))
+                                return $total;
+
+                            foreach ($repeaters as $key => $repeater) {
+                                $total += $get("orderItems.{$key}.total_amount");
+                            }
+
+                            $set('grand_total', $total);
+                            return Number::currency($total, $get('currency'));
+                        }),
+
+                    Hidden::make('grand_total')
+                        ->default(0),
                 ])
             ])->columns(1);
     }

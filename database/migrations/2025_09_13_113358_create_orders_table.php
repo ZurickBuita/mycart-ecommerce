@@ -17,6 +17,7 @@ return new class extends Migration {
             $table->enum('status', ['new', 'processing', 'shipped', 'delivered', 'cancelled'])->default('new');
             $table->enum('currency', ['php', 'usd', 'eur', 'cad'])->default('php');
             $table->enum('shipping_method', ['standard', 'express', 'pick-up'])->default('standard');
+            $table->decimal('grand_total', 10, 2)->unsigned();
             $table->string('notes')->nullable();
             $table->foreignId('user_id')->constrained()->cascadeOnDelete();
 

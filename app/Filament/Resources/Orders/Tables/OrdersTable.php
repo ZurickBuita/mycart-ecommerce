@@ -2,10 +2,14 @@
 
 namespace App\Filament\Resources\Orders\Tables;
 
+use App\Enums\OrderStatus;
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
+use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
 use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
+use Filament\Tables\Columns\SelectColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -15,21 +19,17 @@ class OrdersTable
     {
         return $table
             ->columns([
-                TextColumn::make('payment_method')
-                    ->badge(),
+                TextColumn::make('user.name')
+                    ->sortable(),
+                TextColumn::make('grand_total'),
+                TextColumn::make('payment_method'),
                 TextColumn::make('payment_status')
                     ->badge(),
-                TextColumn::make('status')
-                    ->badge(),
+                SelectColumn::make('status')
+                    ->options(OrderStatus::class),
                 TextColumn::make('currency')
-                    ->badge(),
-                TextColumn::make('shipping_method')
-                    ->badge(),
-                TextColumn::make('notes')
-                    ->searchable(),
-                TextColumn::make('user_id')
-                    ->numeric()
-                    ->sortable(),
+                    ->formatStateUsing(fn(string $state) => strtoupper($state)),
+                TextColumn::make('shipping_method'),
                 TextColumn::make('created_at')
                     ->dateTime()
                     ->sortable()
@@ -43,8 +43,11 @@ class OrdersTable
                 //
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
+                ActionGroup::Make([
+                    ViewAction::make(),
+                    EditAction::make(),
+                    DeleteAction::make(),
+                ]),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
