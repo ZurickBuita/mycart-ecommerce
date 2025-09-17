@@ -17,7 +17,6 @@ use Filament\Infolists\Components\IconEntry;
 use Filament\Infolists\Components\ImageEntry;
 use Filament\Infolists\Components\TextEntry;
 use Filament\Resources\Resource;
-use Filament\Schemas\Components\Utilities\Get;
 use Filament\Schemas\Components\Utilities\Set;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
@@ -40,9 +39,16 @@ class CategoryResource extends Resource
         return $schema
             ->components([
                 TextInput::make('name')
-                    ->required(),
+                    ->required()
+                    ->live(debounce: 1000)
+                    ->afterStateUpdated(
+                        fn($state, Set $set) =>
+                        !empty($state) ? $set('slug', Str::slug($state)) : null
+                    ),
                 TextInput::make('slug')
-                    ->required(),
+                    ->required()
+                    ->dehydrated()
+                    ->disabled(),
                 FileUpload::make('image')
                     ->image()
                     ->directory('category-image')

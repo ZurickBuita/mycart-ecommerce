@@ -2,7 +2,6 @@
 
 namespace App\Filament\Resources\Products\Schemas;
 
-use App\Models\Product;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\MarkdownEditor;
 use Filament\Forms\Components\Select;
@@ -25,9 +24,16 @@ class ProductForm
                         ->schema([
                             Group::make()->schema([
                                 TextInput::make('name')
-                                    ->required(),
+                                    ->required()
+                                    ->live(debounce: 1000)
+                                    ->afterStateUpdated(
+                                        fn($state, Set $set) =>
+                                        !empty($state) ? $set('slug', Str::slug($state)) : null
+                                    ),
                                 TextInput::make('slug')
-                                    ->required(),
+                                    ->required()
+                                    ->dehydrated()
+                                    ->disabled(),
                                 MarkdownEditor::make('description')
                                     ->fileAttachmentsDirectory('products')
                                     ->columnSpanFull(),
