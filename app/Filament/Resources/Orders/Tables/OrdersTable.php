@@ -20,6 +20,7 @@ class OrdersTable
         return $table
             ->columns([
                 TextColumn::make('user.name')
+                    ->label('Customer')
                     ->sortable(),
                 TextColumn::make('grand_total'),
                 TextColumn::make('payment_method'),
