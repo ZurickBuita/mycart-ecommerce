@@ -35,6 +35,7 @@ class ProductForm
                                     ->dehydrated()
                                     ->disabled(),
                                 MarkdownEditor::make('description')
+                                    ->required()
                                     ->fileAttachmentsDirectory('products')
                                     ->columnSpanFull(),
                             ])->columns(2),
@@ -53,8 +54,7 @@ class ProductForm
                             TextInput::make('price')
                                 ->required()
                                 ->numeric()
-                                ->default(0.0)
-                                ->prefix('$'),
+                                ->default(0.0),
                         ]),
                     Section::make('Association')
                         ->schema([
