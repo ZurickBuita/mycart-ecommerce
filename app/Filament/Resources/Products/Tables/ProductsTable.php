@@ -19,10 +19,14 @@ class ProductsTable
         return $table
             ->columns([
                 TextColumn::make('name')
+                    ->sortable()
                     ->searchable(),
-                TextColumn::make('slug')
+                TextColumn::make('category.name')
+                    ->label('Category')
+                    ->sortable()
                     ->searchable(),
-                TextColumn::make('description')
+                TextColumn::make('brand.name')
+                    ->sortable()
                     ->searchable(),
                 TextColumn::make('price')
                     ->money()
@@ -43,16 +47,12 @@ class ProductsTable
                     ->dateTime()
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
-            ])
-            ->filters([
-                //
-            ])
-            ->recordActions([
-                ActionGroup::make([
-                    EditAction::make('edit'),
-                    DeleteAction::make('delete'),
-                ]),
-            ])
+            ])->recordActions([
+                    ActionGroup::make([
+                        EditAction::make('edit'),
+                        DeleteAction::make('delete'),
+                    ]),
+                ])
             ->toolbarActions([
                 BulkActionGroup::make([
                     DeleteBulkAction::make(),
