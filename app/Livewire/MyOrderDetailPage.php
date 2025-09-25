@@ -2,8 +2,10 @@
 
 namespace App\Livewire;
 
+use Livewire\Attributes\Title;
 use Livewire\Component;
 
+#[Title('Order Details - MyCart')]
 class MyOrderDetailPage extends Component
 {
     public function render()
