@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Categories;
 use App\Filament\Resources\Categories\Pages\ManageCategories;
 use App\Models\Category;
 use BackedEnum;
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -40,21 +41,21 @@ class CategoryResource extends Resource
             ->components([
                 TextInput::make('name')
                     ->required()
-                    ->live(debounce: 1000)
-                    ->afterStateUpdated(
-                        fn($state, Set $set) =>
-                        !empty($state) ? $set('slug', Str::slug($state)) : null
-                    ),
+                    ->maxLength(255)
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(fn(string $operation, $state, Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
                 TextInput::make('slug')
-                    ->required()
+                    ->disabled()
                     ->dehydrated()
-                    ->disabled(),
+                    ->required()
+                    ->maxLength(255)
+                    ->unique(Category::class, 'slug', ignoreRecord: true),
                 FileUpload::make('image')
                     ->image()
                     ->directory('category-image')
                     ->required()
                     ->columnSpanFull(),
-                Toggle::make('visibility')
+                Toggle::make('is_active')
                     ->required(),
             ]);
     }
@@ -66,7 +67,7 @@ class CategoryResource extends Resource
                 TextEntry::make('name'),
                 TextEntry::make('slug'),
                 ImageEntry::make('image'),
-                IconEntry::make('visibility')
+                IconEntry::make('is_active')
                     ->boolean(),
                 TextEntry::make('created_at')
                     ->dateTime()
@@ -83,16 +84,19 @@ class CategoryResource extends Resource
             ->recordTitleAttribute('name')
             ->columns([
                 TextColumn::make('name')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('slug')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 ImageColumn::make('image'),
-                IconColumn::make('visibility')
+                IconColumn::make('is_active')
                     ->boolean(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->since()
+                    ->dateTimeTooltip()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(),
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
@@ -102,9 +106,11 @@ class CategoryResource extends Resource
                 //
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
-                DeleteAction::make(),
+                ActionGroup::make([
+                    ViewAction::make(),
+                    EditAction::make(),
+                    DeleteAction::make(),
+                ])
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
