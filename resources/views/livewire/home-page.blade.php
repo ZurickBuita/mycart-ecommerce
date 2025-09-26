@@ -272,109 +272,33 @@
             <div class="max-w-[85rem] px-4 sm:px-6 lg:px-8 mx-auto">
                 <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
 
-                    <a class="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                        href="#">
-                        <div class="p-4 md:p-5">
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center">
-                                    <img class="h-[2.375rem] w-[2.375rem] rounded-full"
-                                        src="https://cdn.bajajelectronics.com/product/b002c02c-c379-49f8-b2a6-bd2e56d0e23a"
-                                        alt="Image Description">
-                                    <div class="ms-3">
-                                        <h3
-                                            class="group-hover:text-blue-600 font-semibold text-gray-800 dark:group-hover:text-gray-400 dark:text-gray-200">
-                                            Laptops
-                                        </h3>
+                    @foreach ($categories as $category)
+                        <a wire:key="{{ $category->id }}"
+                            class="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 border-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                            href="#">
+                            <div class="p-4 md:p-5">
+                                <div class="flex justify-between items-center">
+                                    <div class="flex items-center">
+                                        <img class="h-[2.375rem] w-[2.375rem] rounded-full"
+                                            src="{{ Storage::url($category->image) }}" alt="{{ $category->name }}">
+                                        <div class="ms-3">
+                                            <h3
+                                                class="group-hover:text-blue-600 font-semibold text-gray-800 dark:group-hover:text-gray-400 dark:text-gray-200">
+                                                {{ $category->name }}
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <div class="ps-3">
+                                        <svg class="flex-shrink-0 w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m9 18 6-6-6-6" />
+                                        </svg>
                                     </div>
                                 </div>
-                                <div class="ps-3">
-                                    <svg class="flex-shrink-0 w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="m9 18 6-6-6-6" />
-                                    </svg>
-                                </div>
                             </div>
-                        </div>
-                    </a>
-
-                    <a class="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                        href="#">
-                        <div class="p-4 md:p-5">
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center">
-                                    <img class="h-[2.375rem] w-[2.375rem] rounded-full"
-                                        src="https://static.toiimg.com/thumb/msid-86223197,width-400,resizemode-4/86223197.jpg"
-                                        alt="Image Description">
-                                    <div class="ms-3">
-                                        <h3
-                                            class="group-hover:text-blue-600 font-semibold text-gray-800 dark:group-hover:text-gray-400 dark:text-gray-200">
-                                            Smartphones
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="ps-3">
-                                    <svg class="flex-shrink-0 w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="m9 18 6-6-6-6" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a class="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                        href="#">
-                        <div class="p-4 md:p-5">
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center">
-                                    <img class="h-[2.375rem] w-[2.375rem] rounded-full"
-                                        src="https://store.storeimages.cdn-apple.com/4668/as-images.apple.com/is/watch-card-40-ultra2-202309_GEO_IN_FMT_WHH?wid=508&hei=472&fmt=p-jpg&qlt=95&.v=1693611639854"
-                                        alt="Image Description">
-                                    <div class="ms-3">
-                                        <h3
-                                            class="group-hover:text-blue-600 font-semibold text-gray-800 dark:group-hover:text-gray-400 dark:text-gray-200">
-                                            Smartwatches
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="ps-3">
-                                    <svg class="flex-shrink-0 w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="m9 18 6-6-6-6" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
-
-                    <a class="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 dark:border-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                        href="#">
-                        <div class="p-4 md:p-5">
-                            <div class="flex justify-between items-center">
-                                <div class="flex items-center">
-                                    <img class="h-[2.375rem] w-[2.375rem] rounded-full"
-                                        src="https://i01.appmifile.com/v1/MI_18455B3E4DA706226CF7535A58E875F0267/pms_1632893007.55719480!400x400!85.png"
-                                        alt="Image Description">
-                                    <div class="ms-3">
-                                        <h3
-                                            class="group-hover:text-blue-600 font-semibold text-gray-800 dark:group-hover:text-gray-400 dark:text-gray-200">
-                                            Television
-                                        </h3>
-                                    </div>
-                                </div>
-                                <div class="ps-3">
-                                    <svg class="flex-shrink-0 w-5 h-5" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <path d="m9 18 6-6-6-6" />
-                                    </svg>
-                                </div>
-                            </div>
-                        </div>
-                    </a>
+                        </a>
+                    @endforeach
 
                 </div>
             </div>
@@ -411,7 +335,7 @@
             <div class="grid grid-cols-1 gap-6 lg:grid-cols-2 ">
                 <div class="py-6 bg-white rounded-md shadow dark:bg-gray-900">
                     <div
-                        class="flex flex-wrap items-center justify-between pb-4 mb-6 space-x-2 border-b dark:border-gray-700">
+                        class="flex flex-wrap items-center justify-between pb-4 mb-6 space-x-2 border-b border-gray-200">
                         <div class="flex items-center px-6 mb-2 md:mb-0 ">
                             <div class="flex mr-2 rounded-full">
                                 <img src="https://i.postimg.cc/rF6G0Dh9/pexels-emmy-e-2381069.jpg" alt=""
@@ -430,7 +354,7 @@
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem cupiditate similique,
                         iure minus sed fugit obcaecati minima quam reiciendis dicta!
                     </p>
-                    <div class="flex flex-wrap justify-between pt-4 border-t dark:border-gray-700">
+                    <div class="flex flex-wrap justify-between pt-4 border-t border-gray-200">
                         <div class="flex px-6 mb-2 md:mb-0">
                             <ul class="flex items-center justify-start mr-4">
                                 <li>
@@ -519,7 +443,7 @@
                 </div>
                 <div class="py-6 bg-white rounded-md shadow dark:bg-gray-900">
                     <div
-                        class="flex flex-wrap items-center justify-between pb-4 mb-6 space-x-2 border-b dark:border-gray-700">
+                        class="flex flex-wrap items-center justify-between pb-4 mb-6 space-x-2 border-b border-gray-200">
                         <div class="flex items-center px-6 mb-2 md:mb-0 ">
                             <div class="flex mr-2 rounded-full">
                                 <img src="https://i.postimg.cc/q7pv50zT/pexels-edmond-dant-s-4342352.jpg" alt=""
@@ -538,7 +462,7 @@
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem cupiditate similique,
                         iure minus sed fugit obcaecati minima quam reiciendis dicta!
                     </p>
-                    <div class="flex flex-wrap justify-between pt-4 border-t dark:border-gray-700">
+                    <div class="flex flex-wrap justify-between pt-4 border-t border-gray-200">
                         <div class="flex px-6 mb-2 md:mb-0">
                             <ul class="flex items-center justify-start mr-4">
                                 <li>
@@ -625,7 +549,7 @@
                 </div>
                 <div class="py-6 bg-white rounded-md shadow dark:bg-gray-900">
                     <div
-                        class="flex flex-wrap items-center justify-between pb-4 mb-6 space-x-2 border-b dark:border-gray-700">
+                        class="flex flex-wrap items-center justify-between pb-4 mb-6 space-x-2 border-b border-gray-200">
                         <div class="flex items-center px-6 mb-2 md:mb-0 ">
                             <div class="flex mr-2 rounded-full">
                                 <img src="https://i.postimg.cc/JzmrHQmk/pexels-pixabay-220453.jpg" alt=""
@@ -644,7 +568,7 @@
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem cupiditate similique,
                         iure minus sed fugit obcaecati minima quam reiciendis dicta!
                     </p>
-                    <div class="flex flex-wrap justify-between pt-4 border-t dark:border-gray-700">
+                    <div class="flex flex-wrap justify-between pt-4 border-t border-gray-200">
                         <div class="flex px-6 mb-2 md:mb-0">
                             <ul class="flex items-center justify-start mr-4">
                                 <li>
@@ -731,7 +655,7 @@
                 </div>
                 <div class="py-6 bg-white rounded-md shadow dark:bg-gray-900">
                     <div
-                        class="flex flex-wrap items-center justify-between pb-4 mb-6 space-x-2 border-b dark:border-gray-700">
+                        class="flex flex-wrap items-center justify-between pb-4 mb-6 space-x-2 border-b border-gray-200">
                         <div class="flex items-center px-6 mb-2 md:mb-0 ">
                             <div class="flex mr-2 rounded-full">
                                 <img src="https://i.postimg.cc/4NMZPYdh/pexels-dinielle-de-veyra-4195342.jpg" alt=""
@@ -750,7 +674,7 @@
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem cupiditate similique,
                         iure minus sed fugit obcaecati minima quam reiciendis dicta!
                     </p>
-                    <div class="flex flex-wrap justify-between pt-4 border-t dark:border-gray-700">
+                    <div class="flex flex-wrap justify-between pt-4 border-t border-gray-200">
                         <div class="flex px-6 mb-2 md:mb-0">
                             <ul class="flex items-center justify-start mr-4">
                                 <li>
