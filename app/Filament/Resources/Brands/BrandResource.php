@@ -5,6 +5,7 @@ namespace App\Filament\Resources\Brands;
 use App\Filament\Resources\Brands\Pages\ManageBrands;
 use App\Models\Brand;
 use BackedEnum;
+use Filament\Actions\ActionGroup;
 use Filament\Actions\BulkActionGroup;
 use Filament\Actions\DeleteAction;
 use Filament\Actions\DeleteBulkAction;
@@ -40,15 +41,15 @@ class BrandResource extends Resource
             ->components([
                 TextInput::make('name')
                     ->required()
-                    ->live(debounce: 1000)
-                    ->afterStateUpdated(
-                        fn($state, Set $set) =>
-                        !empty($state) ? $set('slug', Str::slug($state)) : null
-                    ),
+                    ->maxLength(255)
+                    ->live(onBlur: true)
+                    ->afterStateUpdated(fn(string $operation, $state, Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
                 TextInput::make('slug')
-                    ->required()
+                    ->disabled()
                     ->dehydrated()
-                    ->disabled(),
+                    ->required()
+                    ->maxLength(255)
+                    ->unique(Brand::class, 'slug', ignoreRecord: true),
                 FileUpload::make('image')
                     ->image()
                     ->directory('brand-image')
@@ -83,16 +84,19 @@ class BrandResource extends Resource
             ->recordTitleAttribute('name')
             ->columns([
                 TextColumn::make('name')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 TextColumn::make('slug')
-                    ->searchable(),
+                    ->searchable()
+                    ->sortable(),
                 ImageColumn::make('image'),
                 IconColumn::make('is_active')
                     ->boolean(),
                 TextColumn::make('created_at')
-                    ->dateTime()
+                    ->since()
+                    ->dateTimeTooltip()
                     ->sortable()
-                    ->toggleable(isToggledHiddenByDefault: true),
+                    ->toggleable(),
                 TextColumn::make('updated_at')
                     ->dateTime()
                     ->sortable()
@@ -102,9 +106,11 @@ class BrandResource extends Resource
                 //
             ])
             ->recordActions([
-                ViewAction::make(),
-                EditAction::make(),
-                DeleteAction::make(),
+                ActionGroup::make([
+                    ViewAction::make(),
+                    EditAction::make(),
+                    DeleteAction::make(),
+                ])
             ])
             ->toolbarActions([
                 BulkActionGroup::make([
