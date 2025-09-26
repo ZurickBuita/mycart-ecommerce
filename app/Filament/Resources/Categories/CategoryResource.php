@@ -52,6 +52,7 @@ class CategoryResource extends Resource
                     ->unique(Category::class, 'slug', ignoreRecord: true),
                 FileUpload::make('image')
                     ->image()
+                    ->disk('public')
                     ->directory('category-image')
                     ->required()
                     ->columnSpanFull(),
@@ -66,7 +67,7 @@ class CategoryResource extends Resource
             ->components([
                 TextEntry::make('name'),
                 TextEntry::make('slug'),
-                ImageEntry::make('image'),
+                ImageEntry::make('image')->disk('public'),
                 IconEntry::make('is_active')
                     ->boolean(),
                 TextEntry::make('created_at')
@@ -89,7 +90,8 @@ class CategoryResource extends Resource
                 TextColumn::make('slug')
                     ->searchable()
                     ->sortable(),
-                ImageColumn::make('image'),
+                ImageColumn::make('image')
+                    ->disk('public'),
                 IconColumn::make('is_active')
                     ->boolean(),
                 TextColumn::make('created_at')
