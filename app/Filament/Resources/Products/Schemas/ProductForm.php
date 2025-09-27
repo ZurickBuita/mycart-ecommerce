@@ -25,18 +25,19 @@ class ProductForm
                             Group::make()->schema([
                                 TextInput::make('name')
                                     ->required()
-                                    ->live(debounce: 1000)
-                                    ->afterStateUpdated(
-                                        fn($state, Set $set) =>
-                                        !empty($state) ? $set('slug', Str::slug($state)) : null
-                                    ),
+                                    ->maxLength(255)
+                                    ->live(onBlur: true)
+                                    ->afterStateUpdated(fn(string $operation, $state, Set $set) => $operation === 'create' ? $set('slug', Str::slug($state)) : null),
                                 TextInput::make('slug')
-                                    ->required()
+                                    ->disabled()
                                     ->dehydrated()
-                                    ->disabled(),
+                                    ->required()
+                                    ->maxLength(255)
+                                    ->unique(ignoreRecord: true),
                                 MarkdownEditor::make('description')
                                     ->required()
-                                    ->fileAttachmentsDirectory('products')
+                                    ->fileAttachmentsDirectory('products-description-image')
+                                    ->fileAttachmentsDisk('public')
                                     ->columnSpanFull(),
                             ])->columns(2),
                         ]),
@@ -44,6 +45,8 @@ class ProductForm
                         ->schema([
                             FileUpload::make('images')
                                 ->image()
+                                ->disk('public')
+                                ->directory('product-category')
                                 ->multiple()
                                 ->required(),
                         ]),
