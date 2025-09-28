@@ -2,9 +2,12 @@
 
 namespace App\Livewire;
 
+use App\Helpers\CartManagement;
+use App\Livewire\Partials\Navbar;
 use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
+use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 use Livewire\Attributes\Title;
 use Livewire\Attributes\Url;
 use Livewire\Component;
@@ -22,7 +25,7 @@ class ProductsPage extends Component
     public $selected_brands = [];
 
     #[Url]
-    public $feature;
+    public $featured;
 
     #[Url]
     public $sale;
@@ -33,6 +36,19 @@ class ProductsPage extends Component
     #[Url]
     public $sort = 'latest';
 
+    // add product to cart method
+    public function addToCart($product_id)
+    {
+        $total_count = CartManagement::addItemToCart($product_id);
+        $this->dispatch('update-cart-count', total_count: $total_count)->to(Navbar::class);
+
+        LivewireAlert::text('Product added to the cart successfully!')
+            ->success()
+            ->position('bottom-end')
+            ->toast()
+            ->timer(3000)
+            ->show();
+    }
     public function render()
     {
         $productQuery = Product::query()->where('is_active', 1);
@@ -45,7 +61,7 @@ class ProductsPage extends Component
             $productQuery->whereIn('brand_id', $this->selected_brands);
         }
 
-        if ($this->feature) {
+        if ($this->featured) {
             $productQuery->where('is_feature', 1);
         }
 
@@ -53,8 +69,8 @@ class ProductsPage extends Component
             $productQuery->where('on_sale', 1);
         }
 
-        if($this->price_range) {
-            $productQuery->whereBetween('price' , [0, $this->price_range]);
+        if ($this->price_range) {
+            $productQuery->whereBetween('price', [0, $this->price_range]);
         }
 
         $this->sort === 'price' ? $productQuery->orderBy('price') : $productQuery->latest();
