@@ -12,8 +12,10 @@ class CartManagement
         $existing_item = null;
 
         foreach ($cart_items as $key => $item) {
-            $existing_item = $key;
-            break;
+            if ($item['product_id'] === $product_id) {
+                $existing_item = $key;
+                break;
+            }
         }
 
         if ($existing_item !== null) {
@@ -44,8 +46,10 @@ class CartManagement
         $existing_item = null;
 
         foreach ($cart_items as $key => $item) {
-            $existing_item = $key;
-            break;
+            if ($item['product_id'] === $product_id) {
+                $existing_item = $key;
+                break;
+            }
         }
 
         if ($existing_item !== null) {
