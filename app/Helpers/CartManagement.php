@@ -93,7 +93,7 @@ class CartManagement
         Cookie::queue('cart_items', json_encode($cart_items), 60 * 24 * 30);
     }
     // clear cart items from cookie
-    public static function clearCookie()
+    public static function clearCartItems()
     {
         Cookie::queue(Cookie::forget('cart_items'));
     }
