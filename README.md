@@ -1,19 +1,41 @@
 # MyCart E-commerce
 
-MyCart E-commerce is a web application built with Laravel and Filament, designed to provide a seamless online shopping experience. This project includes core e-commerce functionalities such as product browsing, cart management, and order processing.
+MyCart E-commerce is a web application built with Laravel and Filament, designed to provide a seamless online shopping experience. This project includes core e-commerce functionalities such as product browsing, cart management, order processing, and robust admin tools.
 
 ## Features
 
-- User registration and authentication
-- Product listing and detail pages
-- Shopping cart management
-- Order placement and history
-- Admin dashboard for product management (powered by Filament)
+### User Panel
+
+1. **Homepage** displays various products.
+2. **User authentication:** Users can sign up and log in.
+3. **Product details:** Users can view product description, price, images, etc.
+4. **Cart management:** Add products to cart, adjust quantity, and remove products.
+5. **Checkout:** Users can checkout and view an order summary with subtotal, grand total, and address.
+6. **Order history:** Users can view their past orders and track order status.
+
+### Admin Panel
+
+1. **Dashboard:** Admins can view order statistics.
+2. **User management:** View all users, create, edit, and delete users.
+3. **Category management:** Add, edit, and delete categories.
+4. **Brand management:** Add, edit, and delete brands.
+5. **Product management:** Add, edit, and delete products.
+6. **Order management:** View all orders, filter orders by status (new, processing, shipped, cancelled), and view order details.
+7. **Order status:** Admins can update order status.
+
+### Integrations
+
+- **Mailtrap:** Used for email testing and notifications.
+- **Stripe:** Integrated for secure payment processing.
+- **Tailwind CSS:** Installed and used for modern, responsive UI styling. Run `npm run build` after making styling changes.
 
 ## Tech Stack
 
 - **Backend & Framework:** [Laravel](https://laravel.com/)
 - **Admin Panel:** [Filament](https://filamentphp.com/)
+- **Styling:** [Tailwind CSS](https://tailwindcss.com/)
+- **Payment:** [Stripe](https://stripe.com/)
+- **Email:** [Mailtrap](https://mailtrap.io/)
 
 ## Getting Started
 
@@ -41,11 +63,14 @@ MyCart E-commerce is a web application built with Laravel and Filament, designed
    ```bash
    npm install && npm run build
    ```
+   - Tailwind CSS is used for styling. Run `npm run build` whenever you update styles.
 
 4. **Copy the `.env.example` file to `.env` and configure your environment variables:**
    ```bash
    cp .env.example .env
    ```
+   - Set your Mailtrap credentials in the `.env` file for email services.
+   - Set your Stripe keys for payment processing.
 
 5. **Generate application key:**
    ```bash
@@ -56,13 +81,12 @@ MyCart E-commerce is a web application built with Laravel and Filament, designed
    ```bash
    php artisan migrate --seed
    ```
+   - This will create your database structure and seed with sample data.
 
 7. **Serve the application:**
    ```bash
    php artisan serve
    ```
-
-8. **Access the app:**
    - Visit `http://localhost:8000` in your browser.
 
 ### Filament Admin Panel
