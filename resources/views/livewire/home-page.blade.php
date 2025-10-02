@@ -226,12 +226,13 @@
 
                 @foreach ($brands as $brand)
                     <div wire:key="{{ $brand->id }}" class="bg-white rounded-lg shadow-md dark:bg-gray-800">
-                        <a href="">
+                        <a wire:navigate href="/products?selected_brands[0]={{ $brand->id }}">
                             <img src="{{ Storage::url($brand->image) }}" alt="{{ $brand->name }}"
                                 class="object-cover w-full h-64 rounded-t-lg">
                         </a>
                         <div class="p-5 text-center">
-                            <a href="" class="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-300">
+                            <a wire:navigate href="/products?selected_brands[0]={{ $brand->id }}"
+                                class="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-300">
                                 {{ $brand->name }}
                             </a>
                         </div>
@@ -273,9 +274,9 @@
                 <div class="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-6">
 
                     @foreach ($categories as $category)
-                        <a wire:key="{{ $category->id }}"
+                        <a wire:navigate wire:key="{{ $category->id }}"
                             class="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 border-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
-                            href="#">
+                            href="/products?selected_categories[0]={{  $category->id }}">
                             <div class="p-4 md:p-5">
                                 <div class="flex justify-between items-center">
                                     <div class="flex items-center">
