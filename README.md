@@ -83,7 +83,15 @@ MyCart E-commerce is a web application built with Laravel and Filament, designed
    ```
    - This will create your database structure and seed with sample data.
 
-7. **Serve the application:**
+7. **Link the storage:**
+
+   To allow uploaded files (such as images) to be accessible publicly, create a symbolic link:
+
+   ```bash
+   php artisan storage:link
+   ```
+
+8. **Serve the application:**
    ```bash
    php artisan serve
    ```
