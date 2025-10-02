@@ -37,6 +37,7 @@ class OrderForm
                                 'credit card' => 'Credit card',
                                 'bank transfer' => 'Bank transfer',
                                 'paypal' => 'Paypal',
+                                'stripe' => 'Stripe',
                             ])
                             ->default('cash on delivery')
                             ->required(),
