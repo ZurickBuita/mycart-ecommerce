@@ -7,7 +7,6 @@ use App\Filament\Resources\Orders\Pages\EditOrder;
 use App\Filament\Resources\Orders\Pages\ListOrders;
 use App\Filament\Resources\Orders\RelationManagers\AddressRelationManager;
 use App\Filament\Resources\Orders\Schemas\OrderForm;
-use App\Filament\Resources\Orders\Schemas\OrderInfolist;
 use App\Filament\Resources\Orders\Tables\OrdersTable;
 use App\Models\Order;
 use BackedEnum;
@@ -21,7 +20,10 @@ class OrderResource extends Resource
     protected static ?string $model = Order::class;
 
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
-
+    public static function getNavigationBadge(): ?string
+    {
+        return static::getModel()::where('status', 'new')->count();
+    }
     public static function form(Schema $schema): Schema
     {
         return OrderForm::configure($schema);
@@ -35,7 +37,7 @@ class OrderResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+                //
             AddressRelationManager::class
         ];
     }
