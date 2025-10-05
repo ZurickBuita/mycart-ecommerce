@@ -1,6 +1,6 @@
 # MyCart E-commerce
 
-MyCart E-commerce is a web application built with Laravel and Filament, designed to provide a seamless online shopping experience. This project includes core e-commerce functionalities such as product browsing, cart management, order processing, and robust admin tools.
+MyCart E-commerce is a web application built with Laravel and Filament, designed to provide a seamless online shopping experience. This project includes core e-commerce functionalities such as product browsing, cart, checkout, and admin management.
 
 ## Features
 
@@ -49,58 +49,64 @@ MyCart E-commerce is a web application built with Laravel and Filament, designed
 ### Installation
 
 1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/ZurickBuita/mycart-ecommerce.git
-   cd mycart-ecommerce
-   ```
+    ```bash
+    git clone https://github.com/ZurickBuita/mycart-ecommerce.git
+    cd mycart-ecommerce
+    ```
 
 2. **Install PHP dependencies:**
-   ```bash
-   composer install
-   ```
+    ```bash
+    composer install
+    ```
 
 3. **Install JavaScript dependencies and build assets:**
-   ```bash
-   npm install && npm run build
-   ```
-   - Tailwind CSS is used for styling. Run `npm run build` whenever you update styles.
+    ```bash
+    npm install && npm run build
+    ```
+    - Tailwind CSS is used for styling. Run `npm run build` whenever you update styles.
 
 4. **Copy the `.env.example` file to `.env` and configure your environment variables:**
-   ```bash
-   cp .env.example .env
-   ```
-   - Set your Mailtrap credentials in the `.env` file for email services.
-   - Set your Stripe keys for payment processing.
-
+    ```bash
+    cp .env.example .env
+    ```
+    - Set your Mailtrap credentials in the `.env` file for email services.
+    - Set your Stripe keys for payment processing.
+    
+    > **Reminder:** Make sure to change the Stripe secret key and Mailtrap credentials in your `.env` file before deploying to production!
+    
 5. **Generate application key:**
-   ```bash
-   php artisan key:generate
-   ```
+    ```bash
+    php artisan key:generate
+    ```
 
 6. **Run migrations and seeders:**
-   ```bash
-   php artisan migrate --seed
-   ```
-   - This will create your database structure and seed with sample data.
+    ```bash
+    php artisan migrate --seed
+    ```
+    - This will create your database structure and seed with sample data.
 
 7. **Link the storage:**
 
-   To allow uploaded files (such as images) to be accessible publicly, create a symbolic link:
+    To allow uploaded files (such as images) to be accessible publicly, create a symbolic link:
 
-   ```bash
-   php artisan storage:link
-   ```
+    ```bash
+    php artisan storage:link
+    ```
 
 8. **Serve the application:**
-   ```bash
-   php artisan serve
-   ```
-   - Visit `http://localhost:8000` in your browser.
+    ```bash
+    php artisan serve
+    ```
+    - Visit `http://localhost:8000` in your browser.
 
 ### Filament Admin Panel
 
-- After setting up, access the Filament admin panel at `/admin`.
-- Use the credentials from the seeded admin user or create one via the database.
+- To access the admin panel, go to the following route in your browser: `/admin`
+- Login with:
+  - **Email:** `admin@gmail.com`
+  - **Password:** `admin123`
+
+> You can also use the credentials from the seeded admin user or create a new admin via the database if needed.
 
 ## Contributing
 
