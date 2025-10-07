@@ -6,6 +6,8 @@ use App\Helpers\CartManagement;
 use App\Mail\OrderPlaced;
 use App\Models\Address;
 use App\Models\Order;
+use App\Models\User;
+use Filament\Notifications\Notification;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Attributes\Title;
 use Livewire\Component;
@@ -104,6 +106,14 @@ class CheckoutPage extends Component
         $order->orderItems()->createMany($cart_items);
         CartManagement::clearCartItems();
         Mail::to(request()->user())->send(new OrderPlaced($order));
+
+        $recipient = User::where('email', 'admin@gmail.com')->get();
+        Notification::make()
+            ->title('New order added!')
+            ->body('A new order has been successfully created and added to your account.')
+            ->success()
+            ->sendToDatabase($recipient);
+
         return redirect($redirect_url);
     }
     public function render()
