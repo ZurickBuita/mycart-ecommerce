@@ -1,6 +1,6 @@
 # MyCart E-commerce
 
-MyCart E-commerce is a web application built with Laravel and Filament, designed to provide a seamless online shopping experience. This project includes core e-commerce functionalities such as product browsing, cart, checkout, and admin management.
+MyCart E-commerce is a web application built with Laravel and Filament, designed to provide a seamless online shopping experience. This project includes core e-commerce functionalities such as products browsing, cart management, checkout, and an admin panel for store management.
 
 ## Features
 
@@ -22,6 +22,13 @@ MyCart E-commerce is a web application built with Laravel and Filament, designed
 5. **Product management:** Add, edit, and delete products.
 6. **Order management:** View all orders, filter orders by status (new, processing, shipped, cancelled), and view order details.
 7. **Order status:** Admins can update order status.
+8. **Global Search:** Search across users, products, orders, and other admin resources from a unified search bar in the admin panel.
+9. **Database Notifications:** Admins receive real-time notifications about system events (such as new orders, user registrations, etc.) directly in the admin panel.  
+   > **To enable database notifications, you must run the following command:**  
+   > ```bash
+   > php artisan queue:listen
+   > ```
+   > This will process queued notifications and deliver them instantly to the admin panel.
 
 ### Integrations
 
