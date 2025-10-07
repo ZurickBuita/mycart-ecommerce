@@ -8,7 +8,7 @@
                     <h1
                         class="block text-3xl font-bold text-gray-800 sm:text-4xl lg:text-6xl lg:leading-tight dark:text-white">
                         Start your journey with <span class="text-blue-600">MyCart</span></h1>
-                    <p class="mt-3 text-lg text-gray-800 dark:text-gray-400">Purchase wide varities of electronics
+                    <p class="mt-3 text-lg text-gray-800">Purchase wide varities of electronics
                         products like Smartphones, Laptops, Smartwatches, Television and many more.</p>
 
                     <!-- Buttons -->
@@ -22,7 +22,7 @@
                                 <path d="m9 18 6-6-6-6" />
                             </svg>
                         </a>
-                        <a class="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                        <a class="py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-medium rounded-lg bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none"
                             href="/contact">
                             Contact sales team
                         </a>
@@ -246,7 +246,7 @@
 
     <!-- Category Section Start -->
     <section class="py-20">
-        <div class="bg-orange-200 py-20">
+        <div class="bg-slate-300 py-20">
             <div class="max-w-xl mx-auto">
                 <div class="text-center ">
                     <div class="relative flex flex-col items-center">
@@ -275,7 +275,7 @@
 
                     @foreach ($categories as $category)
                         <a wire:navigate wire:key="{{ $category->id }}"
-                            class="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition dark:bg-slate-900 border-gray-400 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                            class="group flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-md transition border-gray-50"
                             href="/products?selected_categories[0]={{  $category->id }}">
                             <div class="p-4 md:p-5">
                                 <div class="flex justify-between items-center">
@@ -283,8 +283,7 @@
                                         <img class="h-[2.375rem] w-[2.375rem] rounded-full"
                                             src="{{ Storage::url($category->image) }}" alt="{{ $category->name }}">
                                         <div class="ms-3">
-                                            <h3
-                                                class="group-hover:text-blue-600 font-semibold text-gray-800 dark:group-hover:text-gray-400 dark:text-gray-200">
+                                            <h3 class="group-hover:text-blue-600 font-semibold text-gray-800">
                                                 {{ $category->name }}
                                             </h3>
                                         </div>
@@ -309,12 +308,12 @@
     <!-- Category Section End -->
 
     <!-- Customer Review Section Start -->
-    <section class="py-14 font-poppins dark:bg-gray-800">
+    <section class="py-14 font-poppins">
         <div class="max-w-6xl px-4 py-6 mx-auto lg:py-4 md:px-6">
             <div class="max-w-xl mx-auto">
                 <div class="text-center ">
                     <div class="relative flex flex-col items-center">
-                        <h1 class="text-5xl font-bold dark:text-gray-200"> Customer <span class="text-blue-500"> Reviews
+                        <h1 class="text-5xl font-bold"> Customer <span class="text-blue-500"> Reviews
                             </span> </h1>
                         <div class="flex w-40 mt-2 mb-6 overflow-hidden rounded">
                             <div class="flex-1 h-2 bg-blue-200">
@@ -334,9 +333,9 @@
             </div>
 
             <div class="grid grid-cols-1 gap-6 lg:grid-cols-2 ">
-                <div class="py-6 bg-white rounded-md shadow dark:bg-gray-900">
+                <div class="py-6 bg-white rounded-md shadow">
                     <div
-                        class="flex flex-wrap items-center justify-between pb-4 mb-6 space-x-2 border-b border-gray-200">
+                        class="flex flex-wrap items-center justify-between pb-4 mb-6 space-x-2 border-b border-slate-200">
                         <div class="flex items-center px-6 mb-2 md:mb-0 ">
                             <div class="flex mr-2 rounded-full">
                                 <img src="https://i.postimg.cc/rF6G0Dh9/pexels-emmy-e-2381069.jpg" alt=""
@@ -345,17 +344,17 @@
                             <div>
                                 <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-300">
                                     Adren Roy</h2>
-                                <p class="text-xs text-gray-500 dark:text-gray-400">Web Designer</p>
+                                <p class="text-xs text-gray-500">Web Designer</p>
                             </div>
                         </div>
-                        <p class="px-6 text-base font-medium text-gray-600 dark:text-gray-400"> Joined 12, SEP , 2022
+                        <p class="px-6 text-base font-medium text-gray-600"> Joined 12, SEP , 2022
                         </p>
                     </div>
-                    <p class="px-6 mb-6 text-base text-gray-500 dark:text-gray-400">
+                    <p class="px-6 mb-6 text-base text-gray-500">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem cupiditate similique,
                         iure minus sed fugit obcaecati minima quam reiciendis dicta!
                     </p>
-                    <div class="flex flex-wrap justify-between pt-4 border-t border-gray-200">
+                    <div class="flex flex-wrap justify-between pt-4 border-t border-slate-200">
                         <div class="flex px-6 mb-2 md:mb-0">
                             <ul class="flex items-center justify-start mr-4">
                                 <li>
@@ -407,15 +406,14 @@
                                     </a>
                                 </li>
                             </ul>
-                            <h2 class="text-sm text-gray-500 dark:text-gray-400">Rating:<span
+                            <h2 class="text-sm text-gray-500">Rating:<span
                                     class="font-semibold text-gray-600 dark:text-gray-300">
                                     3.0</span>
                             </h2>
                         </div>
-                        <div
-                            class="flex items-center px-6 space-x-1 text-sm font-medium text-gray-500 dark:text-gray-400">
+                        <div class="flex items-center px-6 space-x-1 text-sm font-medium text-gray-500">
                             <div class="flex items-center">
-                                <div class="flex mr-3 text-sm text-gray-700 dark:text-gray-400">
+                                <div class="flex mr-3 text-sm text-gray-700">
                                     <a href="#">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor"
@@ -428,7 +426,7 @@
                                     </a>
                                     <span>12</span>
                                 </div>
-                                <div class="flex text-sm text-gray-700 dark:text-gray-400">
+                                <div class="flex text-sm text-gray-700">
                                     <a href="#" class="inline-flex hover:underline">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="w-4 h-4 mr-1 text-blue-400 bi bi-chat"
@@ -442,9 +440,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="py-6 bg-white rounded-md shadow dark:bg-gray-900">
+                <div class="py-6 bg-white rounded-md shadow">
                     <div
-                        class="flex flex-wrap items-center justify-between pb-4 mb-6 space-x-2 border-b border-gray-200">
+                        class="flex flex-wrap items-center justify-between pb-4 mb-6 space-x-2 border-b border-slate-200">
                         <div class="flex items-center px-6 mb-2 md:mb-0 ">
                             <div class="flex mr-2 rounded-full">
                                 <img src="https://i.postimg.cc/q7pv50zT/pexels-edmond-dant-s-4342352.jpg" alt=""
@@ -453,17 +451,17 @@
                             <div>
                                 <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-300">
                                     Sonira Roy</h2>
-                                <p class="text-xs text-gray-500 dark:text-gray-400">Manager</p>
+                                <p class="text-xs text-gray-500">Manager</p>
                             </div>
                         </div>
-                        <p class="px-6 text-base font-medium text-gray-600 dark:text-gray-400"> Joined 12, SEP , 2022
+                        <p class="px-6 text-base font-medium text-gray-600"> Joined 12, SEP , 2022
                         </p>
                     </div>
-                    <p class="px-6 mb-6 text-base text-gray-500 dark:text-gray-400">
+                    <p class="px-6 mb-6 text-base text-gray-500">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem cupiditate similique,
                         iure minus sed fugit obcaecati minima quam reiciendis dicta!
                     </p>
-                    <div class="flex flex-wrap justify-between pt-4 border-t border-gray-200">
+                    <div class="flex flex-wrap justify-between pt-4 border-t border-slate-200">
                         <div class="flex px-6 mb-2 md:mb-0">
                             <ul class="flex items-center justify-start mr-4">
                                 <li>
@@ -515,15 +513,14 @@
                                     </a>
                                 </li>
                             </ul>
-                            <h2 class="text-sm text-gray-500 dark:text-gray-400">Rating:<span
+                            <h2 class="text-sm text-gray-500">Rating:<span
                                     class="font-semibold text-gray-600 dark:text-gray-300">
                                     3.0</span>
                             </h2>
                         </div>
-                        <div
-                            class="flex items-center px-6 space-x-1 text-sm font-medium text-gray-500 dark:text-gray-400">
+                        <div class="flex items-center px-6 space-x-1 text-sm font-medium text-gray-500">
                             <div class="flex items-center">
-                                <div class="flex mr-3 text-sm text-gray-700 dark:text-gray-400">
+                                <div class="flex mr-3 text-sm text-gray-700">
                                     <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor"
                                             class="w-4 h-4 mr-1 text-blue-400 bi bi-hand-thumbs-up-fill"
@@ -534,7 +531,7 @@
                                         </svg></a>
                                     <span>12</span>
                                 </div>
-                                <div class="flex text-sm text-gray-700 dark:text-gray-400">
+                                <div class="flex text-sm text-gray-700">
                                     <a href="#" class="inline-flex hover:underline">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="w-4 h-4 mr-1 text-blue-400 bi bi-chat"
@@ -548,9 +545,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="py-6 bg-white rounded-md shadow dark:bg-gray-900">
+                <div class="py-6 bg-white rounded-md shadow">
                     <div
-                        class="flex flex-wrap items-center justify-between pb-4 mb-6 space-x-2 border-b border-gray-200">
+                        class="flex flex-wrap items-center justify-between pb-4 mb-6 space-x-2 border-b border-slate-200">
                         <div class="flex items-center px-6 mb-2 md:mb-0 ">
                             <div class="flex mr-2 rounded-full">
                                 <img src="https://i.postimg.cc/JzmrHQmk/pexels-pixabay-220453.jpg" alt=""
@@ -559,17 +556,17 @@
                             <div>
                                 <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-300">
                                     William harry</h2>
-                                <p class="text-xs text-gray-500 dark:text-gray-400">Marketing Officer</p>
+                                <p class="text-xs text-gray-500">Marketing Officer</p>
                             </div>
                         </div>
-                        <p class="px-6 text-base font-medium text-gray-600 dark:text-gray-400"> Joined 12, SEP , 2022
+                        <p class="px-6 text-base font-medium text-gray-600"> Joined 12, SEP , 2022
                         </p>
                     </div>
-                    <p class="px-6 mb-6 text-base text-gray-500 dark:text-gray-400">
+                    <p class="px-6 mb-6 text-base text-gray-500">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem cupiditate similique,
                         iure minus sed fugit obcaecati minima quam reiciendis dicta!
                     </p>
-                    <div class="flex flex-wrap justify-between pt-4 border-t border-gray-200">
+                    <div class="flex flex-wrap justify-between pt-4 border-t border-slate-200">
                         <div class="flex px-6 mb-2 md:mb-0">
                             <ul class="flex items-center justify-start mr-4">
                                 <li>
@@ -621,15 +618,14 @@
                                     </a>
                                 </li>
                             </ul>
-                            <h2 class="text-sm text-gray-500 dark:text-gray-400">Rating:<span
+                            <h2 class="text-sm text-gray-500">Rating:<span
                                     class="font-semibold text-gray-600 dark:text-gray-300">
                                     3.0</span>
                             </h2>
                         </div>
-                        <div
-                            class="flex items-center px-6 space-x-1 text-sm font-medium text-gray-500 dark:text-gray-400">
+                        <div class="flex items-center px-6 space-x-1 text-sm font-medium text-gray-500">
                             <div class="flex items-center">
-                                <div class="flex mr-3 text-sm text-gray-700 dark:text-gray-400">
+                                <div class="flex mr-3 text-sm text-gray-700">
                                     <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor"
                                             class="w-4 h-4 mr-1 text-blue-400 bi bi-hand-thumbs-up-fill"
@@ -640,7 +636,7 @@
                                         </svg></a>
                                     <span>12</span>
                                 </div>
-                                <div class="flex text-sm text-gray-700 dark:text-gray-400">
+                                <div class="flex text-sm text-gray-700">
                                     <a href="#" class="inline-flex hover:underline">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="w-4 h-4 mr-1 text-blue-400 bi bi-chat"
@@ -654,9 +650,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="py-6 bg-white rounded-md shadow dark:bg-gray-900">
+                <div class="py-6 bg-white rounded-md shadow">
                     <div
-                        class="flex flex-wrap items-center justify-between pb-4 mb-6 space-x-2 border-b border-gray-200">
+                        class="flex flex-wrap items-center justify-between pb-4 mb-6 space-x-2 border-b border-slate-200">
                         <div class="flex items-center px-6 mb-2 md:mb-0 ">
                             <div class="flex mr-2 rounded-full">
                                 <img src="https://i.postimg.cc/4NMZPYdh/pexels-dinielle-de-veyra-4195342.jpg" alt=""
@@ -665,17 +661,17 @@
                             <div>
                                 <h2 class="text-lg font-semibold text-gray-900 dark:text-gray-300">
                                     James jack</h2>
-                                <p class="text-xs text-gray-500 dark:text-gray-400">Java Programmer</p>
+                                <p class="text-xs text-gray-500">Java Programmer</p>
                             </div>
                         </div>
-                        <p class="px-6 text-base font-medium text-gray-600 dark:text-gray-400"> Joined 12, SEP , 2022
+                        <p class="px-6 text-base font-medium text-gray-600"> Joined 12, SEP , 2022
                         </p>
                     </div>
-                    <p class="px-6 mb-6 text-base text-gray-500 dark:text-gray-400">
+                    <p class="px-6 mb-6 text-base text-gray-500">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Autem cupiditate similique,
                         iure minus sed fugit obcaecati minima quam reiciendis dicta!
                     </p>
-                    <div class="flex flex-wrap justify-between pt-4 border-t border-gray-200">
+                    <div class="flex flex-wrap justify-between pt-4 border-t border-slate-200">
                         <div class="flex px-6 mb-2 md:mb-0">
                             <ul class="flex items-center justify-start mr-4">
                                 <li>
@@ -727,15 +723,14 @@
                                     </a>
                                 </li>
                             </ul>
-                            <h2 class="text-sm text-gray-500 dark:text-gray-400">Rating:<span
+                            <h2 class="text-sm text-gray-500">Rating:<span
                                     class="font-semibold text-gray-600 dark:text-gray-300">
                                     3.0</span>
                             </h2>
                         </div>
-                        <div
-                            class="flex items-center px-6 space-x-1 text-sm font-medium text-gray-500 dark:text-gray-400">
+                        <div class="flex items-center px-6 space-x-1 text-sm font-medium text-gray-500">
                             <div class="flex items-center">
-                                <div class="flex mr-3 text-sm text-gray-700 dark:text-gray-400">
+                                <div class="flex mr-3 text-sm text-gray-700">
                                     <a href="#"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor"
                                             class="w-4 h-4 mr-1 text-blue-400 bi bi-hand-thumbs-up-fill"
@@ -746,7 +741,7 @@
                                         </svg></a>
                                     <span>12</span>
                                 </div>
-                                <div class="flex text-sm text-gray-700 dark:text-gray-400">
+                                <div class="flex text-sm text-gray-700">
                                     <a href="#" class="inline-flex hover:underline">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                             fill="currentColor" class="w-4 h-4 mr-1 text-blue-400 bi bi-chat"
