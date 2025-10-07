@@ -108,9 +108,10 @@ class CheckoutPage extends Component
         Mail::to(request()->user())->send(new OrderPlaced($order));
 
         $recipient = User::where('email', 'admin@gmail.com')->get();
+        
         Notification::make()
             ->title('New order added!')
-            ->body('A new order has been successfully created and added to your account.')
+            ->body('A new order has been successfully created by ' . auth()->user()->name)
             ->success()
             ->sendToDatabase($recipient);
 
