@@ -19,10 +19,13 @@ class OrderResource extends Resource
 {
     protected static ?string $model = Order::class;
 
-    protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
+    protected static string|BackedEnum|null $navigationIcon = Heroicon::ShoppingBag;
+    protected static ?int $navigationSort = 5;
+
     public static function getNavigationBadge(): ?string
     {
-        return static::getModel()::where('status', 'new')->count();
+        $count = static::getModel()::where('status', 'new')->count();
+        return 'New ' . ($count < 100 ? $count : '100+');
     }
     public static function form(Schema $schema): Schema
     {

@@ -44,10 +44,10 @@ class ProductForm
                     Section::make('Images')
                         ->schema([
                             FileUpload::make('images')
-                                ->image()
                                 ->disk('public')
                                 ->directory('product-category')
                                 ->multiple()
+                                ->rules(['image', 'mimes:jpg,jpeg,png,webp'])
                                 ->required(),
                         ]),
                 ])->columnSpan(2),
