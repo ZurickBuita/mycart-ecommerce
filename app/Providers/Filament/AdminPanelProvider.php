@@ -36,6 +36,7 @@ class AdminPanelProvider extends PanelProvider
                 'success' => Color::Emerald,
                 'warning' => Color::Orange,
             ])
+            ->viteTheme('resources/css/app.css')
             ->sidebarWidth('16rem')
             ->spa()
             ->font('Poppins')
