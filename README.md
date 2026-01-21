@@ -111,7 +111,7 @@ MyCart E-commerce is a web application built with Laravel and Filament, designed
 - To access the admin panel, go to the following route in your browser: `/admin`
 - Login with:
   - **Email:** `admin@gmail.com`
-  - **Password:** `admin123`
+  - **Password:** `admin1234`
 
 > You can also use the credentials from the seeded admin user or create a new admin via the database if needed.
 
